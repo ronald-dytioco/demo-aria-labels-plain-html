@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta
+   name="viewport"
+   content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+ </head>
+
+ <body class="p-2">
+  <header
+   class="flex justify-between h-full align-items-center font-bold text-xl">
+   <a href="/">Ronald.dev</a>
+
+   <nav>
+    <ul class="flex gap-4 font-medium">
+     <li>
+      <a href="/accounts">Accounts</a>
+     </li>
+     <li>
+      <a href="/about-me">About Me</a>
+     </li>
+     <li>
+      <a href="/billings">Billings</a>
+     </li>
+    </ul>
+   </nav>
+  </header>
+
+  <main class="mt-20 font-semibold text-sm grid gap-6">
+   <section>
+    <h1 class="text-2xl">Lets learn about accesibility!</h1>
+    <p class="text-justify text-pretty max-w-[40rem]">
+     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea provident natus
+     at aliquam id iusto, fuga officia, repellendus ratione alias, veniam itaque
+     illum? Suscipit quo sunt error nam vero incidunt?
+    </p>
+   </section>
+
+   <section>
+    <h3 class="text-2xl">Frequently Asked Questions</h3>
+    <!-- accordion -->
+    <ul
+     id="accordion"
+     class="mt-2 grid gap-1 text-white"></ul>
+   </section>
+
+   <section></section>
+  </main>
+
+  <script>
+   const loremText =
+    'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem exercitationem, hic, perspiciatis inventore corrupti eum laboriosam nesciunt voluptatem in sunt cum iste numquam! Quae aliquam impedit, facere quasi aliquid eius.';
+
+   const accordionData = [
+    {
+     title: 'UI Design',
+     content: loremText,
+    },
+    {
+     title: 'Figma UI',
+     content: loremText,
+    },
+    {
+     title: 'UI/UX with Aria Labels',
+     content: loremText,
+    },
+    // Add more objects for additional accordion items
+   ];
+
+   document.addEventListener('DOMContentLoaded', function () {
+    const accordionContainer = document.querySelector('#accordion');
+    accordionData.forEach((item, i) => {
+     const li = document.createElement('li');
+     li.id = `_item_${i}`;
+     li.className = 'bg-blue-600 p-2';
+     li.innerHTML = `
+        <!-- accordion toggle -->
+        <button id="_accordion_${i}_button" aria-expanded="false" aria-controls="_accordion_${i}_content" class="flex justify-between items-center w-full" onclick="toggleAccordion(${i})">
+          ${item.title}
+          <span class="inline-block">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </button>
+        <!-- expanded element -->
+        <p id="_accordion_${i}_content" class="hidden">${item.content}</p>
+      `;
+     accordionContainer.appendChild(li);
+    });
+   });
+
+   function toggleAccordion(i) {
+    const lisItem = document.querySelector(`#_item_${i}`);
+    const contentDom = document.querySelector(`#_accordion_${i}_content`);
+    const buttonDom = document.querySelector(`#_accordion_${i}_button`);
+    const isExpanded = buttonDom.getAttribute('aria-expanded') === 'true';
+
+    const [greenClass, blueClass] = ['bg-emerald-600', 'bg-blue-600'];
+
+    if (isExpanded) {
+     contentDom.classList.add('hidden');
+     buttonDom.setAttribute('aria-expanded', 'false');
+     lisItem.classList.remove(greenClass);
+     lisItem.classList.add(blueClass);
+    } else {
+     contentDom.classList.remove('hidden');
+     buttonDom.setAttribute('aria-expanded', 'true');
+     lisItem.classList.add(greenClass);
+     lisItem.classList.remove(blueClass);
+    }
+   }
+  </script>
+ </body>
+</html>
