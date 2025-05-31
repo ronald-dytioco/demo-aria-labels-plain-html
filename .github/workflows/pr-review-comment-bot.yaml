@@ -1,3 +1,7 @@
+permissions:
+  pull-requests: write
+  contents: read
+
 name: Sticky Comment After Review
 on:
   pull_request_review:
@@ -16,7 +20,6 @@ jobs:
 
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
-          hide_and_recreate: true
           hide_classify: "OUTDATED"
           message: |
             ## Pull Request Reviewer Report
