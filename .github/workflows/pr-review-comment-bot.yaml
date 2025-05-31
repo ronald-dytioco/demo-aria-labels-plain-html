@@ -1,7 +1,3 @@
-permissions:
-  pull-requests: write
-  contents: read
-
 name: Sticky Comment After Review
 on:
   pull_request_review:
@@ -11,89 +7,95 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - name: Get Reviewer and Date
+        id: review_details
+        run: |
+          echo "REVIEWER=${{ github.event.review.user.login }}" >> $GITHUB_ENV
+          echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
+          echo "TIME=$(TZ=Asia/Singapore date +"%H:%M:%S")" >> $GITHUB_ENV
+
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           hide_and_recreate: true
           hide_classify: "OUTDATED"
           message: |
             ## Pull Request Reviewer Report
-  
-            **Author:** [Insert Author Name]  
-            **Reviewer:** [Your Name]  
-            **Date:** [Insert Date]  
-            **Time Taken to Review:** [Insert Time]
-  
+
+            **Author:** ${{ github.event.pull_request.user.login }}  
+            **Reviewer:** ${{ env.REVIEWER }}  
+            **Date:** ${{ env.DATE }} - ${{ env.TIME }}
+            **Time Taken to Review:** [Insert Time Taken]
+
             ---
-            
+
             #### Approval Status:
-            
+
             - [ ] Approved
             - [ ] Rejected / Requires Changes
-            
+
             ---
-            
+
             #### Why was it Rejected?
-            
+
             - [ ] Requirement 1 not met
             - [ ] Requirement 2 not met
             - [ ] Requirement 3 not met
             - [ ] Requirement 4 not met
-            
+
             ---
-            
+
             <details>
               <summary>Functional Requirement</summary>
-            
-            Your hidden content goes here.  
-             You can add lists, code, or any markdown content inside.
-            
-            - Example item 1
-            - Example item 2
-            
+
+              Your hidden content goes here.  
+              You can add lists, code, or any markdown content inside.
+
+              - Example item 1
+              - Example item 2
+
             </details>
-            
+
             ---
-            
+
             <details>
               <summary>Security</summary>
-            
-            Your hidden content goes here.  
-             You can add lists, code, or any markdown content inside.
-            
-            - Example item 1
-            - Example item 2
-            
+
+              Your hidden content goes here.  
+              You can add lists, code, or any markdown content inside.
+
+              - Example item 1
+              - Example item 2
+
             </details>
-            
+
             ---
-            
+
             <details>
               <summary>Maintainability</summary>
-            
-            Your hidden content goes here.  
-             You can add lists, code, or any markdown content inside.
-            
-            - Example item 1
-            - Example item 2
-            
+
+              Your hidden content goes here.  
+              You can add lists, code, or any markdown content inside.
+
+              - Example item 1
+              - Example item 2
+
             </details>
-            
+
             ---
-            
+
             <details>
               <summary>Performance</summary>
-            
-            Your hidden content goes here.  
-             You can add lists, code, or any markdown content inside.
-            
-            - Example item 1
-            - Example item 2
-            
+
+              Your hidden content goes here.  
+              You can add lists, code, or any markdown content inside.
+
+              - Example item 1
+              - Example item 2
+
             </details>
-            
+
             ---
-            
+
             #### Overall Remarks
-            
+
             > [Enter your additional remarks here]
-  
