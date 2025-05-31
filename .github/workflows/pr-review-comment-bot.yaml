@@ -15,11 +15,12 @@ jobs:
         id: review_details
         run: |
           echo "REVIEWER=${{ github.event.review.user.login }}" >> $GITHUB_ENV
-          echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
+          echo "DATE=$(date +"%d/%m/%Y")" >> $GITHUB_ENV
           echo "TIME=$(TZ=Asia/Singapore date +"%H:%M:%S")" >> $GITHUB_ENV
 
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
+          hide_and_recreate: true
           hide_classify: "OUTDATED"
           message: |
             ## Pull Request Reviewer Report
