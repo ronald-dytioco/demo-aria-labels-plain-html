@@ -14,7 +14,7 @@ jobs:
       - name: "Run script for analytics"
         uses: AlexSim93/pull-request-analytics-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # In the case of a personal access token, it needs to be added to the repository's secrets and used in this field.
+          GITHUB_TOKEN: ${{ secrets.TOKEN }} # In the case of a personal access token, it needs to be added to the repository's secrets and used in this field.
           GITHUB_REPO_FOR_ISSUE: "demo-aria-labels-plain-html"
           GITHUB_OWNER_FOR_ISSUE: "ronald-dytioco"
           GITHUB_OWNERS_REPOS: "ronald-dytioco/demo-aria-labels-plain-html"
