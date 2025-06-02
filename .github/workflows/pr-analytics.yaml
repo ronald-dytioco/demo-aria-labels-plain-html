@@ -23,3 +23,4 @@ jobs:
           TIMEZONE: "Asia/Singapore"
           REPORT_DATE_START: ${{ inputs.report_date_start }}
           REPORT_DATE_END: ${{ inputs.report_date_end }}
+          SHOW_STATS_TYPES: timeline, workload, pr-quality, code-review-engagement, response-time
